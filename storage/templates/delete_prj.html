@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+
+{% block title %}{{prj.name}}{% endblock title %}
+{% block heading %} {{mode_prj}} {% endblock heading %}
+
+
+{% block content %}
+
+<form action="" method="POST">
+  {% csrf_token %}
+
+ 	<table>
+    {{ form.as_table }}
+    </table>
+
+	
+	<br>
+    {% if file_list.count > 0 %}
+    <h2>Перелік документів, що пов'язані з проектом також будуть видалені</h2>
+    <table>
+        <thead><th>Id</th><th>Опис</th><th>файл</th><th>link</th></thead>
+        {% for fl in file_list %}
+        <tr>
+            <td>{{ fl.id }}</td>
+            <td>{{ fl.description}}</td>
+            <td>{{ fl.document  }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+	<br><br>
+
+    <br><br>
+
+  	<button type="button" id="button" /> Ні, не видаляти </button>
+	<button type = "submit"> Так, видалити </button>
+	
+	<script> 
+	  button.onclick = function() { 
+	  	history.back();
+	  	return false;
+	   };
+	</script> 
+
+</form>
+
+
+
+{% endblock %}

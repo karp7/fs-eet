@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}{{prj.name}}{% endblock title %}
+{% block heading %}Перегляд проекту{% endblock heading %}
+
+{% block content %}
+	<ul id="top_menu">
+	    <li><a href="#" id="home">Назад</a></li>
+	    <li><a href="#">Створити</a>
+	        <ul>
+	          <li><a href="{% url 'padd' %}">Проект</a></li>
+	          <li><a href="/fadd/{{prj.id}}">Документ</a></li>
+	        </ul>
+	    </li>
+	    <li><a href="/pedit/{{prj.id}}">Редагувати</a></li>
+	    <li><a href="/pdel/{{prj.id}}">Видалити</a></li>
+	    
+	</ul>
+	<script> 
+	  home.onclick = function() { 
+	  	history.back();
+	  	return false;
+	   };
+	</script> 
+
+	<h2>{{prj.name}}</h2>
+	<i>{{prj.description}}</i>
+	<br><br>
+
+	    {% if doc_ls.count > 0 %}
+	    	<b>Перелік документів проекту:</b>
+		    	<form action="/st/{{prj.id}}/" method="post" > {% csrf_token %}
+		    		<table>
+			        {% for doc in doc_ls %}
+						<tr>
+							<td>
+					    		<input type="checkbox" name="select_file" value={{doc.id}}>{{doc.description}}
+					      	</td>
+					      	<td>
+					    		<i id="doc_files">{{doc.document.path}}</i>
+					      	</td>
+					    </tr>
+			        {% endfor %}
+			        </table>
+					<br><br>
+					<table>
+						<tr>
+							<td>Виберіть дію</td>
+							<td>
+				        	<select size="1" name="delOrload">
+							    <option disabled>Виберіть дію</option>
+							    <option value="Load">Завантажити</option>
+							    <option value="Del">Видалити</option>
+					   		</select>			
+							</td>
+							<td><button type="submit">Застосувати</button> </td>
+						</tr>
+					</table>
+			        
+    			</form>
+		    	
+			
+	    {% endif %}
+{% endblock %}

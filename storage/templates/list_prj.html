@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Проекти{% endblock title %}
+
+ {% block heading %}Проекти{% endblock heading %}
+
+{% block content %}
+
+
+
+	  <ul id="top_menu">
+	    <li><a href="#" id="home">Назад</a></li>
+	    <li><a href="#">Створити</a>
+	        <ul>
+	          <li><a href="{% url 'padd' %}">Проект</a></li>
+	        </ul>
+	    </li>
+
+	  </ul>
+
+
+	<script> 
+	  home.onclick = function() { 
+	  	history.back();
+	  	return false;
+	   };
+	</script> 
+
+<br><br>
+
+    {% if prj_list.count > 0 %}
+	    <table>
+	        {% for prj in prj_list %}
+	        <tr>
+	            <td>
+		     	   <li><a href="/pview/{{prj.id}}">{{prj.name}} </a></li>
+			       <i>{{prj.description}}</i>
+	            </td>
+	        </tr>
+	        {% endfor %}
+	    </table>
+    {% endif %}
+
+{% endblock %}
