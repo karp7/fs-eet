@@ -142,7 +142,7 @@ def fAdd(request, pg_id):
             
     else:
         form = DocumentForm()
-    return render(request, '.html', {
+    return render(request, 'add_doc.html', {
         'form': form,
         'file_list': file_list,
         'mode_prj':mode_prj,
